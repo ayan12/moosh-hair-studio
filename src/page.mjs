@@ -44,7 +44,7 @@ export function renderPage(c, assets) {
   const json = (o) => JSON.stringify(o).replace(/</g, '\\u003c');
 
   const clientData = {
-    whatsapp: b.whatsapp, name: b.legalName,
+    whatsapp: b.whatsapp, name: b.legalName, hero: c.hero,
     problems: c.problems, colors: c.colors.map(({ name, hex, note, photo, quote, quoteBy }) => ({ name, hex, note, photo: photo || null, quote: quote || null, quoteBy: quoteBy || null }))
   };
 
@@ -68,6 +68,7 @@ export function renderPage(c, assets) {
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/img/${attr(c.hero.photo)}-800.webp" as="image" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="${attr(assets.css)}">
 <script type="application/ld+json">${json(jsonLd)}</script>
 <script type="application/json" id="site-data">${json(clientData)}</script>
@@ -104,9 +105,10 @@ export function renderPage(c, assets) {
         </ul>
       </div>
       <div class="mirror" id="mirror">
-        <canvas id="hero-hair" role="img" aria-label="Ilustrasi rambut interaktif. Usap untuk merapikan rambut."></canvas>
+        <canvas id="hero-hair" role="img" aria-label="Foto rambut ${attr(c.hero.label)} hasil Moosh. Usap untuk menghilangkan frizz dan melihat hasilnya."></canvas>
         <div class="mirror-frame" aria-hidden="true"></div>
-        <p class="mirror-hint" aria-hidden="true">usap rambutnya…</p>
+        <p class="mirror-hint" aria-hidden="true">sisir rambutnya…</p>
+        <p class="mirror-result" aria-hidden="true"><span class="script">${esc(c.hero.label)}</span><small>Hasil asli di Moosh</small></p>
         <div class="mirror-tag"><span>Frizz <b id="frizz-pct">100%</b></span><button type="button" id="refrizz">Kusutkan lagi</button></div>
       </div>
     </div>

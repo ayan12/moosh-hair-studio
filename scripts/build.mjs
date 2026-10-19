@@ -24,9 +24,10 @@ await writeFile(r('dist' + cssName), css);
 
 // JS: tiny bundle (hair.js inlined into app.js) so one hashed file is served.
 const hair = (await readFile(r('src/js/hair.js'), 'utf8')).replace(/^export /gm, '');
-const app = (await readFile(r('src/js/app.js'), 'utf8')).replace(/^import .*$/m, '');
+const reveal = (await readFile(r('src/js/reveal.js'), 'utf8')).replace(/^export /gm, '');
+const app = (await readFile(r('src/js/app.js'), 'utf8')).replace(/^import .*$/gm, '');
 // hair.js gets its own scope so its top-level names can never clash with app.js.
-const js = `// Moosh Hair Studio\nconst { Hair } = (() => {\n${hair}\nreturn { Hair };\n})();\n${app}`;
+const js = `// Moosh Hair Studio\nconst { Hair } = (() => {\n${hair}\nreturn { Hair };\n})();\nconst { Reveal } = (() => {\n${reveal}\nreturn { Reveal };\n})();\n${app}`;
 const jsName = `/assets/app.${hash(js)}.js`;
 await writeFile(r('dist' + jsName), js);
 
@@ -54,5 +55,6 @@ function validate(c) {
   need(Array.isArray(c.colors) && c.colors.length > 0, 'colors must be a non-empty list');
   for (const col of c.colors) need(/^#[0-9a-fA-F]{6}$/.test(col.hex), `color "${col.name}" needs a hex like #A8552C`);
   for (const g of c.gallery || []) need(/^[a-z0-9-]+$/.test(g.photo), `gallery photo "${g.photo}" must be a simple file name`);
+  need(/^[a-z0-9-]+$/.test(c.hero?.photo || ''), 'hero.photo must be a simple file name');
   for (const col of c.colors) if (col.photo) need(/^[a-z0-9-]+$/.test(col.photo), `color photo "${col.photo}" must be a simple file name`);
 }

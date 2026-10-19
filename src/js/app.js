@@ -1,4 +1,5 @@
 import { Hair } from './hair.js';
+import { Reveal } from './reveal.js';
 
 document.documentElement.classList.add('js');
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -14,41 +15,46 @@ const wa = (text) => `https://wa.me/${encodeURIComponent(DATA.whatsapp)}?text=${
 const clean = (v, max) => String(v || '').replace(/[\u0000-\u001F\u007F]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 const press = (buttons, active) => buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === active)));
 
-/* ---------------- hero: comb the hair ---------------- */
+/* ---------------- hero: brush away the frizz to reveal the real result ---------------- */
 {
   const mirror = $('#mirror'), cv = $('#hero-hair'), pct = $('#frizz-pct');
-  const hair = new Hair(cv, { n: 280, seg: 40, top: 0.13, len: 0.97, sway: true });
-  hair.set({ wave: 0.25, frizz: 1, dull: 0.35, shine: 1, color: '#4A2E22' }); hair.snap();
-  let shown = -1;
-  hair.onDraw = () => { const v = Math.round(hair.frizzLevel() * 100); if (v !== shown) { shown = v; pct.textContent = `${v}%`; } };
+  const reveal = new Reveal(cv, `/img/${encodeURIComponent(DATA.hero.photo)}-800.webp`, { focusY: DATA.hero.focusY });
+  reveal.onLevel = (v) => {
+    const n = Math.round(v * 100);
+    pct.textContent = `${n}%`;
+    if (n <= 50) reveal.finish();
+    mirror.classList.toggle('done', n <= 2);
+  };
 
   let last = null, demo = null;
-  const stopDemo = () => { if (demo) { clearInterval(demo); demo = null; hair.active = false; } };
+  const stopDemo = () => { if (demo) { clearInterval(demo); demo = null; } };
   const pos = (e) => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
-  const begin = (p) => { stopDemo(); mirror.classList.add('used'); last = p; hair.active = true; hair.request(); };
-  cv.addEventListener('pointerdown', (e) => { cv.setPointerCapture(e.pointerId); begin(pos(e)); });
+  const begin = (p) => { stopDemo(); mirror.classList.add('used'); last = p; };
+  cv.addEventListener('pointerdown', (e) => { cv.setPointerCapture(e.pointerId); begin(pos(e)); reveal.comb(last[0], last[1], last[0], last[1] + 1); });
   cv.addEventListener('pointermove', (e) => {
     const p = pos(e);
     if (!last) { if (e.pointerType === 'mouse') begin(p); return; }
-    const vx = p[0] - last[0], vy = p[1] - last[1], steps = Math.max(1, Math.ceil(Math.hypot(vx, vy) / 10));
-    for (let j = 1; j <= steps; j++) hair.comb(last[0] + (vx * j) / steps, last[1] + (vy * j) / steps, vx, vy);
+    reveal.comb(last[0], last[1], p[0], p[1]);
     last = p;
   });
-  const end = () => { last = null; hair.active = false; };
+  const end = () => { last = null; };
   ['pointerup', 'pointercancel', 'pointerleave'].forEach((t) => cv.addEventListener(t, end));
-  $('#refrizz').addEventListener('click', () => hair.refrizz());
+  $('#refrizz').addEventListener('click', () => { reveal.reset(); mirror.classList.remove('done'); });
 
-  // A ghost comb shows what to do, once, unless the visitor gets there first.
-  if (!REDUCED) setTimeout(() => {
+  // A ghost comb makes three strokes so visitors see what happens, unless they get there first.
+  if (!REDUCED) reveal.ready.then(() => setTimeout(() => {
     if (mirror.classList.contains('used')) return;
-    let t = 0; hair.active = true; hair.request();
-    const xs = [0.5, 0.38, 0.62, 0.28, 0.72];
+    let t = 0, prev = null;
+    const xs = [0.5, 0.36, 0.64], N = 46;
     demo = setInterval(() => {
-      t++; const pass = Math.floor(t / 40), u = (t % 40) / 40;
+      const pass = Math.floor(t / N), u = (t % N) / N; t++;
       if (pass >= xs.length) return stopDemo();
-      hair.comb(hair.w * xs[pass], hair.h * (0.14 + u * 0.8), 0, 10);
+      const x = reveal.w * (xs[pass] + Math.sin(u * 3) * 0.02), y = reveal.h * (0.1 + u * 0.85);
+      if (u === 0) prev = null;
+      if (prev) reveal.comb(prev[0], prev[1], x, y);
+      prev = [x, y];
     }, 16);
-  }, 1400);
+  }, 1200)).catch(() => {});
 }
 
 /* ---------------- rumus: problem → treatment ---------------- */
