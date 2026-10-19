@@ -1,0 +1,115 @@
+# Pages CMS (https://pagescms.org): a simple editing dashboard for the salon owner.
+# Every field in content/site.json is listed here so saving from the dashboard never drops data.
+media:
+  input: public/img
+  output: /img
+
+content:
+  - name: site
+    label: Website Moosh
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: business
+        label: Info salon
+        type: object
+        fields:
+          - { name: name, label: Nama brand, type: string, required: true }
+          - { name: legalName, label: Nama salon (untuk pesan WA), type: string, required: true }
+          - { name: tagline, label: Tagline, type: string }
+          - { name: since, label: Berdiri sejak (tahun), type: number }
+          - { name: city, label: Kota, type: string }
+          - { name: address, label: Alamat, type: string }
+          - { name: region, label: Provinsi, type: string }
+          - { name: country, label: Kode negara, type: string }
+          - { name: mapsUrl, label: Link Google Maps, type: string }
+          - { name: whatsapp, label: "Nomor WhatsApp (format 62…, tanpa + atau spasi)", type: string, required: true }
+          - { name: whatsappDisplay, label: Nomor WhatsApp (tampilan), type: string }
+          - { name: whatsappNote, label: Catatan WhatsApp, type: string }
+          - { name: instagram, label: Username Instagram, type: string }
+          - { name: instagramFollowers, label: Jumlah pengikut, type: string }
+          - { name: instagramPosts, label: Jumlah postingan, type: string }
+          - name: hours
+            label: Jam buka
+            type: object
+            fields:
+              - { name: open, label: "Buka (HH:MM)", type: string }
+              - { name: close, label: "Tutup (HH:MM)", type: string }
+              - { name: label, label: Teks jam buka, type: string }
+              - { name: days, label: Hari, type: string }
+      - name: site
+        label: SEO
+        type: object
+        fields:
+          - { name: url, label: Alamat website, type: string }
+          - { name: title, label: Judul halaman, type: string }
+          - { name: description, label: Deskripsi Google, type: text }
+      - name: promo
+        label: Promo
+        type: object
+        fields:
+          - { name: active, label: Promo sedang berjalan?, type: boolean }
+          - { name: label, label: Nama promo, type: string }
+          - { name: price, label: Harga, type: string }
+          - { name: priceNote, label: Keterangan harga, type: string }
+          - { name: items, label: Paket, type: string, list: true }
+          - { name: terms, label: Syarat, type: string }
+          - { name: inactiveText, label: Teks saat promo tidak aktif, type: string }
+      - name: services
+        label: Layanan
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Nama layanan, type: string }
+          - { name: text, label: Deskripsi, type: text }
+      - name: problems
+        label: Rumus rambut
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Masalah, type: string }
+          - { name: detail, label: Keterangan, type: string }
+          - { name: treatment, label: Perawatan, type: string }
+          - { name: result, label: Hasil, type: text }
+          - name: before
+            label: Simulasi sebelum
+            type: object
+            fields:
+              - { name: wave, type: number }
+              - { name: frizz, type: number }
+              - { name: dull, type: number }
+              - { name: color, type: string }
+          - name: after
+            label: Simulasi sesudah
+            type: object
+            fields:
+              - { name: wave, type: number }
+              - { name: frizz, type: number }
+              - { name: dull, type: number }
+              - { name: color, type: string }
+      - name: colors
+        label: Colour lab
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Nama warna, type: string }
+          - { name: hex, label: "Kode warna (#RRGGBB)", type: string }
+          - { name: note, label: Keterangan, type: string }
+          - { name: photo, label: Nama foto (opsional), type: string }
+          - { name: quote, label: Testimoni (opsional), type: text }
+          - { name: quoteBy, label: Dari (opsional), type: string }
+      - name: gallery
+        label: Galeri hasil
+        type: object
+        list: true
+        fields:
+          - { name: photo, label: Nama foto, type: string }
+          - { name: alt, label: Deskripsi foto, type: string }
+          - { name: label, label: Label, type: string }
+      - name: booking
+        label: Form booking
+        type: object
+        fields:
+          - { name: services, label: Pilihan layanan, type: string, list: true }
+          - { name: slots, label: Pilihan jam, type: string, list: true }

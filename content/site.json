@@ -1,0 +1,77 @@
+{
+  "business": {
+    "name": "Moosh Hair Studio",
+    "legalName": "Salon Moosh",
+    "tagline": "Rambut sehat, cantik, percaya diri.",
+    "since": 2008,
+    "city": "Banjarbaru",
+    "address": "Jl. Panglima Batur RT 01, depan Supermarket Azahra",
+    "region": "Kalimantan Selatan",
+    "country": "ID",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Salon+Moosh+Jl.+Panglima+Batur+Banjarbaru",
+    "whatsapp": "6281347371108",
+    "whatsappDisplay": "0813 4737 1108",
+    "whatsappNote": "Chat only, tidak menerima telepon",
+    "instagram": "salonmoosh.banjarbaru",
+    "instagramFollowers": "12.1K",
+    "instagramPosts": "1.400+",
+    "hours": {
+      "open": "09:00",
+      "close": "18:00",
+      "label": "09.00–18.00 WITA",
+      "days": "Mo-Su"
+    }
+  },
+  "site": {
+    "url": "https://moosh-concept.vercel.app",
+    "title": "Moosh Hair Studio Banjarbaru · Salon Khusus Perempuan",
+    "description": "Salon rambut khusus perempuan di Banjarbaru sejak 2008. Smoothing, keratin, hair color dan potong rambut dengan L'Oréal Professionnel dan Matrix. Booking via WhatsApp."
+  },
+  "promo": {
+    "active": false,
+    "label": "Kemerdekaan · Agustus",
+    "price": "Rp500rb",
+    "priceNote": "untuk rambut panjang",
+    "items": ["Smoothing + Keratin", "Keratin + Color", "Smoothing + Color"],
+    "terms": "Wajib booking. S&K berlaku.",
+    "inactiveText": "Promo baru diumumkan setiap bulan. Tanya promo bulan ini lewat WhatsApp."
+  },
+  "services": [
+    { "name": "Smoothing", "text": "Rambut ikal dan mengembang jadi lurus, halus dan mudah diatur." },
+    { "name": "Pure Keratin", "text": "Memperbaiki struktur rambut yang rusak karena proses kimia, dan mengurangi frizz." },
+    { "name": "Hair Color", "text": "Dari brunette natural sampai ash dan blonde, termasuk teknik French Blending L'Oréal." },
+    { "name": "Hair Cut", "text": "Potongan yang menyesuaikan bentuk wajah dan tekstur rambutmu." },
+    { "name": "Hairmask", "text": "Nutrisi dalam untuk rambut kering dan kasar, jadi lembut dan lembab lagi." },
+    { "name": "Produk Retail", "text": "Rawat hasilnya di rumah dengan produk yang kami pakai di salon." }
+  ],
+  "problems": [
+    { "title": "Ikal / keriting", "detail": "Susah diatur, mengembang", "treatment": "Smoothing", "result": "Rambut jadi halus, lembut, mudah diatur dan tidak mengembang.",
+      "before": { "wave": 1, "frizz": 0.55, "dull": 0.35, "color": "#4A2E22" }, "after": { "wave": 0.04, "frizz": 0, "dull": 0, "color": "#4A2E22" } },
+    { "title": "Kering", "detail": "Kusut, kasar, terlihat tidak sehat", "treatment": "Hairmask", "result": "Rambut lebih lembut, lembab dan ternutrisi dari dalam.",
+      "before": { "wave": 0.3, "frizz": 1, "dull": 0.65, "color": "#52372A" }, "after": { "wave": 0.22, "frizz": 0.05, "dull": 0, "color": "#4A2E22" } },
+    { "title": "Rusak / ngembang", "detail": "Rapuh akibat proses kimia", "treatment": "Pure Keratin", "result": "Memperbaiki struktur rambut, mengurangi frizz dan membuat rambut lebih kuat.",
+      "before": { "wave": 0.45, "frizz": 1, "dull": 0.5, "color": "#A47C52" }, "after": { "wave": 0.3, "frizz": 0, "dull": 0, "color": "#3E271D" } },
+    { "title": "Kusam", "detail": "Warna pudar, rambut terlihat lelah", "treatment": "Coloring", "result": "Memberi warna yang fresh, hidup dan sesuai karakter kamu.",
+      "before": { "wave": 0.15, "frizz": 0.25, "dull": 1, "color": "#5A4A40" }, "after": { "wave": 0.2, "frizz": 0, "dull": 0, "color": "#7A3F22" } }
+  ],
+  "colors": [
+    { "name": "Copper", "hex": "#A8552C", "note": "Hangat dan menyala di bawah matahari.", "photo": "copper",
+      "quote": "Warna copper ini kayaknya jadi warna rambut terbaik aku sejauh ini 🥹🧡", "quoteBy": "@baity.yy" },
+    { "name": "Light Blonde Ash", "hex": "#B3A184", "note": "Blonde lembut dengan nada ash.", "photo": "blonde-ash" },
+    { "name": "Ash Brown", "hex": "#6E6152", "note": "Cokelat dingin yang lembut dan modern.", "photo": "ash-brown" },
+    { "name": "Burgundy Rose", "hex": "#8E2747", "note": "Merah keunguan yang berani dan berkilau.", "photo": "burgundy" },
+    { "name": "Ash Grey", "hex": "#9A958F", "note": "Dingin dan modern, cukup dengan 1x bleaching.",
+      "quote": "Nggak nyesel pilih warna ash grey. Hasilnya cantik banget dan sesuai ekspektasi.", "quoteBy": "@baity.yy" },
+    { "name": "Natural Brown", "hex": "#4A2E22", "note": "Brunette natural yang selalu aman." }
+  ],
+  "gallery": [
+    { "photo": "copper", "alt": "Rambut panjang warna copper dengan poni, hasil Moosh Hair Studio", "label": "Copper + layer" },
+    { "photo": "blonde-ash", "alt": "Rambut panjang light blonde ash dengan poni, hasil Moosh Hair Studio", "label": "Light Blonde Ash" },
+    { "photo": "burgundy", "alt": "Rambut bergelombang warna burgundy rose dilihat dari belakang", "label": "Burgundy Rose" },
+    { "photo": "ash-brown", "alt": "Rambut panjang lurus warna ash brown", "label": "Ash Brown" }
+  ],
+  "booking": {
+    "services": ["Smoothing", "Pure Keratin", "Hair Color", "Smoothing + Color", "Keratin + Color", "Hair Cut", "Hairmask", "Konsultasi dulu"],
+    "slots": ["09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00", "16.00", "17.00"]
+  }
+}

@@ -1,0 +1,1 @@
+{ "name": "Moosh Hair Studio", "short_name": "Moosh", "start_url": "/", "display": "browser", "background_color": "#1E1411", "theme_color": "#1E1411", "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }] }
