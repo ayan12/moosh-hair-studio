@@ -79,11 +79,14 @@ export function renderPage(c, assets) {
 
 <header class="top">
   <div class="wrap top-in">
-    <a class="logo" href="#main" aria-label="${attr(b.name)}, ke atas"><span class="logo-m">Moosh</span><span class="logo-s">HAIR STUDIO</span></a>
-    <nav class="nav" aria-label="Menu utama">
+    <a class="logo" href="/" aria-label="${attr(b.name)}, beranda"><span class="logo-m">Moosh</span><span class="logo-s">HAIR STUDIO</span></a>
+    <nav class="nav" id="site-nav" aria-label="Menu utama">
       <a href="#rumus">Rumus rambut</a><a href="#hasil">Hasil</a><a href="#warna">Warna</a><a href="#ladies">Ladies only</a><a href="#booking">Booking</a>
     </nav>
-    <a class="btn btn-sm" href="${attr(waGeneral)}" ${ext}>${icon.wa}<span>Booking via WA</span></a>
+    <div class="top-actions">
+      <a class="btn btn-sm" href="${attr(waGeneral)}" ${ext}>${icon.wa}<span>Booking via WA</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Buka menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 
@@ -238,7 +241,7 @@ export function renderPage(c, assets) {
         <dl class="visit">
           <div><dt>${icon.pin}Alamat</dt><dd>${esc(b.address)}, ${esc(b.city)}<br><a href="${attr(b.mapsUrl)}" ${ext}>Buka di Google Maps →</a></dd></div>
           <div><dt>${icon.clock}Jam buka</dt><dd>${esc(b.hours.label)}</dd></div>
-          <div><dt>${icon.wa}WhatsApp</dt><dd><span id="wa-num">${esc(b.whatsappDisplay)}</span> <button class="copy" type="button" id="copy-num" data-copy="0${attr(b.whatsapp.slice(2))}">Salin</button><br><small>${esc(b.whatsappNote)}</small></dd></div>
+          <div><dt>${icon.wa}WhatsApp</dt><dd><a id="wa-num" href="${attr(waGeneral)}" ${ext}>${esc(b.whatsappDisplay)}</a> <button class="copy" type="button" id="copy-num" data-copy="0${attr(b.whatsapp.slice(2))}">Salin</button><br><small>${esc(b.whatsappNote)}</small></dd></div>
           <div><dt>${icon.ig}Instagram</dt><dd><a href="${attr(igLink(b.instagram))}" ${ext}>@${esc(b.instagram)}</a></dd></div>
         </dl>
       </div>
@@ -275,6 +278,11 @@ export function renderPage(c, assets) {
         <div class="form-foot">
           <p class="form-hint">Jam ${esc(b.hours.label)} · Kami balas secepatnya di jam kerja.</p>
           <button class="btn btn-wa btn-block" type="submit">${icon.wa}Kirim booking ke WhatsApp</button>
+          <div class="form-ok" id="form-ok" role="status" hidden>
+            <b>Pesan booking sudah siap ✓</b>
+            <span>WhatsApp sudah terbuka dengan pesanmu. Tinggal tekan kirim, lalu kami konfirmasi jadwalnya.</span>
+            <a id="form-ok-link" href="${attr(waGeneral)}" ${ext}>WhatsApp tidak terbuka? Klik di sini →</a>
+          </div>
         </div>
       </form>
     </div>
@@ -287,8 +295,9 @@ export function renderPage(c, assets) {
     <div class="foot-cols">
       <p>Salon khusus perempuan<br>${esc(b.city)} · sejak ${esc(b.since)}</p>
       <p>${esc(b.address)}<br>${esc(b.city)}, ${esc(b.region)}</p>
-      <p>WhatsApp ${esc(b.whatsappDisplay)}<br>Instagram <a href="${attr(igLink(b.instagram))}" ${ext}>@${esc(b.instagram)}</a></p>
+      <p>WhatsApp <a href="${attr(waGeneral)}" ${ext}>${esc(b.whatsappDisplay)}</a><br>Instagram <a href="${attr(igLink(b.instagram))}" ${ext}>@${esc(b.instagram)}</a></p>
     </div>
+    <nav class="foot-nav" aria-label="Menu footer"><a href="#rumus">Rumus rambut</a><a href="#hasil">Hasil</a><a href="#warna">Warna</a><a href="#ladies">Ladies only</a><a href="#booking">Booking</a><a href="${attr(igLink(b.instagram))}" ${ext}>Instagram</a><a href="${attr(b.mapsUrl)}" ${ext}>Google Maps</a></nav>
     <p class="foot-copy">© ${new Date().getFullYear()} ${esc(b.name)}. Semua hak dilindungi.</p>
   </div>
 </footer>

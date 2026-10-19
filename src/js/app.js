@@ -134,6 +134,8 @@ const press = (buttons, active) => buttons.forEach((b) => b.setAttribute('aria-p
       '', 'Apakah jadwalnya tersedia?'
     ];
     const url = wa(lines.join('\n'));
+    $('#form-ok-link').href = url;
+    $('#form-ok').hidden = false;
     const win = window.open(url, '_blank', 'noopener,noreferrer');
     if (!win) location.href = url;
   });
@@ -144,6 +146,16 @@ const press = (buttons, active) => buttons.forEach((b) => b.setAttribute('aria-p
     catch { const r = document.createRange(); r.selectNodeContents($('#wa-num')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copy.textContent = 'Terpilih'; }
     setTimeout(() => { copy.textContent = 'Salin'; }, 1500);
   });
+}
+
+/* ---------------- mobile menu ---------------- */
+{
+  const btn = $('.menu-toggle'), nav = $('#site-nav');
+  const set = (open) => { nav.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); btn.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu'); };
+  btn.addEventListener('click', () => set(!nav.classList.contains('open')));
+  $$('a', nav).forEach((a) => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); btn.focus(); } });
+  matchMedia('(min-width: 901px)').addEventListener('change', () => set(false));
 }
 
 /* ---------------- reveal on scroll ---------------- */

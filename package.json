@@ -7,7 +7,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node scripts/build.mjs && npx --yes html-validate@11.16.1 dist/index.html dist/404.html",
+    "check": "node scripts/build.mjs && node scripts/check-links.mjs && npx --yes html-validate@11.16.1 dist/index.html dist/404.html",
     "preview": "node scripts/serve.mjs"
   }
 }
